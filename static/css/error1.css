@@ -1,0 +1,42 @@
+body{
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    
+}
+.outer{
+    width: 500px;
+    height:150px;
+    display: flex;
+    text-align: center;
+    background-color: rgb(107, 171, 227);
+    justify-content: center;
+    margin-top: 10%;
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px rgb(0, 0, 0);
+
+}
+
+.link{
+    text-decoration: none;
+    color: white;
+
+
+}
+.button{
+    width: 100px;
+    height: 30px;
+    margin-top: 20%;
+    padding-top: 10px;
+    background-color: blue;
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px rgb(255, 255, 255);
+}
+
+.button:hover{
+    background-color: white;
+     
+}
+.button:hover .link{
+    color: black; 
+}

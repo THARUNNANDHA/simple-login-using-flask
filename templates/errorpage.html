@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/error1.css') }}">
+    <script src="{{ url_for('static', filename='script/script.js') }}"></script>
+    <title>Error page</title>
 </head>
 <body>
-    <h1>Data already exist</h1>
-    <a href="/">Login</a>
+    <div class="outer">
+        <h1>Data already exist</h1>
+        <div class="button"><a  class="link" href="/">Login</a></div>
+        
+    </div>
 </body>
 </html>
