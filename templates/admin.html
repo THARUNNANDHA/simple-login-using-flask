@@ -3,9 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>admin</title>
+    <title>Admin</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .button{
+            padding: 5px 5px;
+            background-color: red;
+            color: azure;
+            border-radius: 5px;
+            cursor: pointer
+            
+        }
+
+    </style>
 </head>
 <body>
-    <h1>admin</h1>
+    <h1>Login Details</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Password</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for login_detail in login_details %}
+            <tr>
+                <td>{{ login_detail.name }}</td>
+                <td>{{ login_detail.password }}</td>
+                <td>{{ login_detail.phone }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="/delete_all" style="display: flex; justify-content: center; align-items: center; margin-top: 30px; text-decoration: none; cursor: pointer;" >
+        <button class="button">Delete database</button>
+      </a>
 </body>
 </html>
+

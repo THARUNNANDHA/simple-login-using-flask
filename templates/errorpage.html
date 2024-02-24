@@ -8,9 +8,17 @@
     <title>Error page</title>
 </head>
 <body>
+    
     <div class="outer">
         <h1>Data already exist</h1>
         <div class="button"><a  class="link" href="/">Login</a></div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
         
     </div>
 </body>

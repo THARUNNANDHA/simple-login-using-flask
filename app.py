@@ -1,8 +1,14 @@
 
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for,flash
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.exc import SQLAlchemyError
+
 
 app= Flask(__name__)
+app.secret_key = "tharun_secret" 
+
+
+
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
@@ -28,12 +34,14 @@ def add_data():
         existing_data = login_data.query.filter_by(name=name, password=passw).first()
         
         if existing_data:
-            # If data exists, redirect to the welcome page
+            flash("you are successfuly logged in")  
             return render_template('errorpage.html', name=name)
         else:
             new_data = login_data(name=name, password=passw,phone=phone)
             db.session.add(new_data)
-        db.session.commit()
+            db.session.commit()
+            return render_template("login.html")
+        
         
         
     
@@ -51,7 +59,7 @@ def check_data():
         
         if admin_name==name and admin_password==passw:
             # If data exists, redirect to the welcome page
-            return render_template('admin.html')
+            return redirect(url_for('admin'))
         elif existing_data:
             # If data does not exist, redirect to the login page
             return render_template('welcome.html', name=name)
@@ -60,13 +68,17 @@ def check_data():
 
 @app.route('/delete_all', methods=['GET', 'POST'])
 def delete_all():
-    if request.method == 'POST':
-        # Delete all rows from the login_data table
-        db.session.query(login_data).delete()
-        db.session.commit()
-        
-        return redirect(url_for('home'))
+    # Delete all rows from the login_data table
+    db.session.query(login_data).delete()
+    db.session.commit()
+    
+    return redirect(url_for('admin'))
 
+@app.route('/admin')
+def admin():
+    # Fetch all login details from the database
+    login_details = login_data.query.all()
+    return render_template('admin.html', login_details=login_details)
 
 @app.route('/signup')
 def signup():
